@@ -12,33 +12,93 @@ return elements in Last In First Out order.
 """
 # class Stack:
 #     def __init__(self):
-#         self.items = []
+#         self.size = 0
+#         self.storage = []
         
-#     def isEmpty(self):
-#         return self.items == []
+#     def __len__(self):
+#         return self.size
     
-#     def push(self,item):
-#         self.items.append(item)
+#     def push(self, value):
+#         self.storage.append(value)
+#         self.size += 1
         
 #     def pop(self):
-#         return self.items.pop()
+#         if self.size == 0:
+#             return None
+#         else:
+#             self.size -= 1
+#             return self.storage.pop()
+        
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+        
+    def __str__(self):
+        return f'{self.value}, {self.next}'
     
-#     def peek(self):
-#         return self.items[len(self.items)-1]
+class LinkedList:
+    def __init__(self):
+        self.head = None
+        
+    def isempty(self):
+        if self.head == None:
+            return True
+        else:
+            return False
+        
+    def push(self, value):
+        if self.head == None:
+            self.head = Node(value)
+            
+        else:
+            new_node = Node(value)
+            new_node.next = self.head
+            self.head = new_node
+            
+    def pop(self):
+        if self.isempty():
+            return None
+        else:
+            oldNode = self.head
+            self.head = self.head.next
+            oldNode.next = None
+            return oldNode.value
+        
+    def getcount(self):
+        temp_node = self.head
+        count = 0
+        while temp_node:
+            count += 1
+            temp_node = temp_node.next
+        return count
     
-#     def size(self):
-#         return len(self.items)
+    def __str__(self):
+        return f'{self.head}'
     
 class Stack:
-    def __init__(self, LinkedList):
+    def __init__(self):
         self.size = 0
         self.storage = LinkedList()
 
     def __len__(self):
-        pass
+        return self.size
 
     def push(self, value):
-        pass
+        self.storage.push(value)
+        self.size = self.storage.getcount()
 
     def pop(self):
-        pass
+        value = self.storage.pop()
+        self.size = self.storage.getcount()
+        return value
+
+
+stack = Stack()
+stack.push(100)
+stack.push(101)
+stack.push(105)
+
+
+stack.pop()
+

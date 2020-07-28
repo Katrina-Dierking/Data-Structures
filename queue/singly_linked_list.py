@@ -83,10 +83,13 @@ class LinkedList:
 
         #3. list with two or more elements
         else:
+            # start at the head since we can't go back from the tail to the previous node
             cur_node = self.head
+            # loop through until we get to the node that is pointing to the tail (so we don't go too far)
             while cur_node.get_next() is not self.tail:
                 cur_node = cur_node.get_next()
 
+            # so we can return the value of the removed node, we need to save it to a variable
             value = self.tail.get_value()
             cur_node.set_next(None)
             self.tail = cur_node
