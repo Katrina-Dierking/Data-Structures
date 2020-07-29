@@ -135,9 +135,11 @@ class DoublyLinkedList:
     order of the other elements of the List.
     """
     def delete(self, node):
+        #if the list is empty
         if self.tail is None and self.head is None:
             return None
 
+        #if the list only has 1 node
         elif self.tail is self.head:
             self.head = None
             self.tail = None
@@ -150,18 +152,18 @@ class DoublyLinkedList:
             self.remove_from_tail()
 
         else:
-            curr_node = self.head
+            cur_node = self.head
             prev_node = None
             next_node = self.head.get_next()
 
-            while curr_node is not node:
-                prev_node = curr_node
-                curr_node = next_node
-                next_node = curr_node.get_next()
+            while cur_node is not node:
+                prev_node = cur_node
+                cur_node = next_node
+                next_node = cur_node.get_next()
             
             prev_node.set_next(next_node)
             next_node.set_prev(prev_node)
-            curr_node = None
+            cur_node = None
             self.length -= 1
         
 
