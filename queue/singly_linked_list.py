@@ -113,8 +113,8 @@ class LinkedList:
         # we need a temp node
         # we have to start at the head
       
-        cur_node = self.head
         cur_max = self.head.get_value()
+        cur_node = self.head
         while cur_node is not None:
             if cur_node.get_value() > cur_max:
                 cur_max = cur_node.get_value()

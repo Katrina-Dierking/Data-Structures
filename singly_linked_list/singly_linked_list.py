@@ -32,7 +32,6 @@ class LinkedList:
         self.head = new_node    
         if self.length == 0:
             # if self.head is None and self.tail is None
-            new_node = Node(value, self.head)
             self.head = new_node
             self.length += 1 
 
@@ -50,31 +49,31 @@ class LinkedList:
         # we need to think about empty vs non-empty lists
         # if there is no head, there is nothing to remove_head
 
-        if self.head is None:
+        if self.head is None and self.tail is None:
             return None
+        
+        cur_value = self.head.get_value()
 
         # list with 1 node
-        elif self.head == self.tail:
-            value = self.head.get_value()
+        if self.head is self.tail:
             self.head = None
             self.tail = None
-            self.length -=1
-            return value
 
         # list with two or more nodes
         else:
             # point head to whatever the current node is
             self.head = self.head.get_next()
-            self.length -=1
+        self.length -= 1
+        return cur_value
 
 
     def remove_tail(self):
         #1 empty list
-        if self.head is None:
+        if self.tail is None and self.head is None:
             return None
 
         #2. list with one element
-        elif self.head == self.tail:
+        elif self.head is self.tail:
             value = self.tail.get_value()
             self.head = None
             self.tail = None
@@ -83,16 +82,18 @@ class LinkedList:
 
         #3. list with two or more elements
         else:
+            # start at the head since we can't go back from the tail to the previous node
             cur_node = self.head
+            old_tail = self.tail.get_value()
+            # loop through until we get to the node that is pointing to the tail (so we don't go too far)
             while cur_node.get_next() is not self.tail:
                 cur_node = cur_node.get_next()
 
-            value = self.tail.get_value()
-            cur_node.set_next(None)
+            # so we can return the value of the removed node, we need to save it to a variable
             self.tail = cur_node
+            self.tail.set_next(new_next = None)
             self.length -= 1
-            return value
-    
+            return old_tail
 
 
     def contains(self, value):
@@ -111,9 +112,8 @@ class LinkedList:
         # we need to keep track of a current node
         # we need a temp node
         # we have to start at the head
-      
-        cur_node = self.head
         cur_max = self.head.get_value()
+        cur_node = self.head
         while cur_node is not None:
             if cur_node.get_value() > cur_max:
                 cur_max = cur_node.get_value()
@@ -122,21 +122,4 @@ class LinkedList:
         return cur_max
 
 
-    def find_middle(self):
-        # doing this in one pass without using "length"
-        mid_point = self.head
-        end_point = self.head
-        while end_point is not None or end_point.get.next() is not None:
-            #while loop is skipping forward by one and by two
-            mid_point = mid_point.get_next()
-            end_point = end_point.get_next().get_next()
-
-        return mid_point.value
-
-ll = LinkedList()
-ll.add_to_tail(1)
-ll.add_to_tail(2)
-ll.add_to_tail(3)
-ll.add_to_tail(4)
-ll.add_to_tail(5)
-print(ll.find_middle())
+   

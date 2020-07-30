@@ -9,7 +9,7 @@ This part of the project comprises two days:
 2. Implement the `in_order_print`, `bft_print`, and `dft_print` methods
    on the BSTNode class.
 """
-class BSTNode:
+class BST:
     def __init__(self, value):
         self.value = value
         self.left = None
@@ -50,27 +50,81 @@ class BSTNode:
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
+         #1. Base case: no more nodes in subtree
+        
+        #2  Base case: 
+        fn(self.value)
+        if self.left is not None:
+            #for each node with a left child, call the cb function on it
+            self.left.for_each(fn)
+        if self.right is not None:
+            self.right.for_each(fn)
+         
+        cur_node = self  
+        fn(cur_node.value) 
+        # stack = # nodes you need to backtrack to
+        while cur_node.left:
+            cur_node = cur_node.left
+            fn(cur_node)
+            #add it to the stack
         pass
 
     # Part 2 -----------------------
 
+    def delete(self,value):
+        pass
+        #research like we did in contains
+        
+        #if nde at bottom level
+            #update parent left/right = None
+        #if node has only one child
+            #parent.left/right = node.left/right
+        #if node has two children
+            #larger child becomes parent of its sibling
+        #if the child then has two children, which becomes the parent
+        
+        
+        
+        
+        
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self):
-        pass
+        if self:
+        
+            if self.left:
+                #go left - recursive
+                #calling recursion on itself continually creates an infinite loop
+                self.left.in_order_print()
+            #print
+            if self.right:
+                #go right
+                self.right.in_order_print()
+            pass
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self):
+        #use a queue
+        #print current node
+        #add left child to q
+        #add right child to q
+        
         pass
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self):
+        #use a stack
+        #push some initial value(5) ? onto stack so while loop has something to use
+        #while ???
         pass
 
     # Stretch Goals -------------------------
     # Note: Research may be required
+    
+
+    
 
     # Print Pre-order recursive DFT
     def pre_order_dft(self):
@@ -83,7 +137,7 @@ class BSTNode:
 """
 This code is necessary for testing the `print` methods
 """
-bst = BSTNode(1)
+bst = BST(1)
 
 bst.insert(8)
 bst.insert(5)
