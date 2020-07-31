@@ -75,7 +75,7 @@ class BST:
             cur_node = cur_node.left
             fn(cur_node)
             #add it to the stack
-        pass
+
 
     # Part 2 -----------------------
 
