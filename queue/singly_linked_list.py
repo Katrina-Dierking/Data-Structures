@@ -112,6 +112,7 @@ class LinkedList:
         # we need to keep track of a current node
         # we need a temp node
         # we have to start at the head
+      
         cur_max = self.head.get_value()
         cur_node = self.head
         while cur_node is not None:
