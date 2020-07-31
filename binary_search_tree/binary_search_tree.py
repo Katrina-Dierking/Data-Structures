@@ -17,36 +17,44 @@ class BST:
 
     # Insert the given value into the tree
     def insert(self, value):
-        pass
-        # cur_node = self.value
-        
-        #start at root and loop until cur_node is None
-        #compare value and cur_node
-            #if value <= cur_node
-                #if cur_node.left is None
-                    #insert our value
-                #else
-                    #go left (update cur_node to be cur_node.left)
-            #elif value > cur_node
-                #if cur_node.right is None
-                    #insert our value
-                #else
-                    #go right (update cur node to be cur_node.right)
+        if value < self.value:
+            if not self.left:
+                self.left = BST(value)
+            else:
+                self.left.insert(value)
+        else:
+            if not self.right:
+                self.right = BST (value)
+            else:
+                self.right.insert(value)
 
-    # Return True if the tree contains the value
-    # False if it does not
     def contains(self, target):
         #compare target_value to cur_value
             #1. sides == we return true
             #2  < go left
             #3  > go right
             #4  if can't go left/right (not found, return False)
-        pass
+        if target == self.value:
+            return True
+        if target < self.value:
+            if not self.left:
+                return False
+            return self.left.contains(target)
+        else:
+            if not self.right:
+                return False
+            return self.right.contains(target)
 
     # Return the maximum value found in the tree
     def get_max(self):
         #go right
-        pass
+        current = self
+        max_value = self.value
+        while current:
+            if current.value > max_value:
+                max_value = current.value
+            current = current.right
+        return max_value
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
